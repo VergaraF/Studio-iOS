@@ -10,6 +10,8 @@ target 'Studio' do
   pod 'CreditCardForm'
   pod 'JSQMessagesViewController'
   pod 'Firebase/Core'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
 
   target 'StudioTests' do
     inherit! :search_paths
