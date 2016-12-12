@@ -16,6 +16,8 @@ import Firebase
 class ViewController: UIViewController {
 
     let loginManager = LoginManager()
+    var retrievedUser:FIRUser? = nil
+
     
     @IBOutlet weak var loginWithFBUIBtn: UIButton!
     
@@ -27,6 +29,16 @@ class ViewController: UIViewController {
             print("you're logged")
             
             hideButton(button: loginWithFBUIBtn, hide: true)
+            let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+            
+            FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+                // ...
+                if let error = error {
+                    print("it wasn't possible to login in firebase using FB as the app loaded")
+                }
+                print("Logged IN FIREBASE!")
+                self.retrievedUser = user!
+            }
          
         } else {
             print("you're NOT logged")
