@@ -116,6 +116,7 @@
                     </view>
                     <connections>
                         <outlet property="appnameLabel" destination="prP-WV-s04" id="sCg-z4-IMu"/>
+                        <outlet property="centerYConstraint" destination="QUZ-ni-6r5" id="xZd-Ec-Dtr"/>
                         <outlet property="emailTextField" destination="T40-RB-jTT" id="Iu0-0C-dK6"/>
                         <outlet property="loginWithFBUIBtn" destination="lXT-Fw-f1S" id="KCq-ZW-YTf"/>
                         <outlet property="passwordTextfield" destination="Mkg-dj-Dkm" id="ypQ-el-DGG"/>

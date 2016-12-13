@@ -28,6 +28,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var appnameLabel: UILabel!
 
+    @IBOutlet var centerYConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         
@@ -82,11 +83,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         switch (sender as! UIButton).tag {
         case 0:
             (sender as! UIButton).tag = 1
-            self.appnameLabel.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 150)
+            
+            self.appnameLabel.removeConstraint(centerYConstraint)
 
             if self.view.bounds.maxY < 600{
                 print("true")
-                //self.appnameLabel.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 100)
+                self.appnameLabel.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 140)
+            }else{
+                self.appnameLabel.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 80)
+
             }
             hideButton(button: loginWithFBUIBtn, hide: true)
             hideButton(button: singUpBtn, hide: true)
@@ -180,11 +185,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-        print(textField.tag)
-       // textField.viewWithTag(textField.tag + 1)
+
         if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField{
             print("next first responder found")
             nextField.becomeFirstResponder()
+            
         } else {
             // Not found, so remove keyboard.
             textField.resignFirstResponder()

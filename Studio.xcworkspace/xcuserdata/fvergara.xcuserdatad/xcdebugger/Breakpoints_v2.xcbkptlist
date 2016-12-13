@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Studio/ViewController.swift"
-            timestampString = "503297200.922076"
+            timestampString = "503297780.609649"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "regularLoginAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
