@@ -49,7 +49,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
             
             FIRAuth.auth()?.signIn(with: credential) { (user, error) in
-                if let error = error {
+                if error != nil {
                     print("it wasn't possible to login in firebase using Facebook as the app loaded")
                 }
                 //SEGUE TO TUTOR CARDS
@@ -71,16 +71,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func regularLoginAction(_ sender: Any) {
         print("regular login")
         
-        emailTextField.isHidden = false
+        emailTextField.isHidden    = false
         passwordTextfield.isHidden = false
+        
+      //  self.emailTextField.center    = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 100)
+     //   self.passwordTextfield.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 100)
 
+       // self.appnameLabel.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 100)
 
         switch (sender as! UIButton).tag {
         case 0:
             (sender as! UIButton).tag = 1
+            self.appnameLabel.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 150)
+
             if self.view.bounds.maxY < 600{
                 print("true")
-                self.appnameLabel.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 100)
+                //self.appnameLabel.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 100)
             }
             hideButton(button: loginWithFBUIBtn, hide: true)
             hideButton(button: singUpBtn, hide: true)
@@ -91,14 +97,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
         case 1:
             (sender as! UIButton).tag = 0
             
-            hideButton(button: loginWithFBUIBtn, hide: false)
-            hideButton(button: singUpBtn, hide: false)
+            
+            
             
             if (emailTextField.text != nil && passwordTextfield.text != nil){
                 FIRAuth.auth()?.signIn(withEmail: emailTextField.text!, password: passwordTextfield.text!) { (user, error) in
                     if (error != nil){
                         (sender as! UIButton).tag = 1
                         print("There was a problem authenticating given user. Perhaps it doesnt exist, or password/email is incorrent")
+                        self.hideButton(button: self.loginWithFBUIBtn, hide: false)
+                        self.hideButton(button: self.singUpBtn, hide: false)
                         return
                     }
                     
@@ -182,7 +190,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             textField.resignFirstResponder()
         }
         // Do not add a line break
-        return false
+        return true
     }
     
     
