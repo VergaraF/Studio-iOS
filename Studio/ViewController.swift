@@ -32,6 +32,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         
 
+        super.viewDidLoad()
+
         print(self.view.bounds.maxY)
 
         if (FBSDKAccessToken.current() != nil) {
@@ -56,7 +58,6 @@ class ViewController: UIViewController {
         
 
        
-        super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -64,9 +65,6 @@ class ViewController: UIViewController {
         button.isHidden = hide
     }
     @IBAction func regularLoginAction(_ sender: Any) {
-        
-        
-        
         print("regular login")
         
         emailTextField.isHidden = false
@@ -80,15 +78,41 @@ class ViewController: UIViewController {
                 print("true")
                 self.appnameLabel.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 100)
             }
+            hideButton(button: loginWithFBUIBtn, hide: true)
+            hideButton(button: singUpBtn, hide: true)
+
+            
 
             break;
         case 1:
+            (sender as! UIButton).tag = 0
+            
+            hideButton(button: loginWithFBUIBtn, hide: false)
+            hideButton(button: singUpBtn, hide: false)
+            
+            if (emailTextField.text != nil && passwordTextfield.text != nil){
+                FIRAuth.auth()?.signIn(withEmail: emailTextField.text!, password: passwordTextfield.text!) { (user, error) in
+                    if (error != nil){
+                        (sender as! UIButton).tag = 1
+                        print("There was a problem authenticating given user. Perhaps it doesnt exist, or password/email is incorrent")
+                        return
+                    }
+                    
+                    UserDefaults.standard.set(user?.displayName, forKey: "username")
+                    UserDefaults.standard.set(user?.uid, forKey: "uid")
+                }
+
+            }else{
+                print("no empty email or password is allow")
+            }
+            
+
+
             break;
         default:
             print("aayy")
         }
         
-        hideButton(button: loginWithFBUIBtn, hide: true)
 
         
     }
