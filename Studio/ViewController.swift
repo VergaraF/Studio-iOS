@@ -13,7 +13,7 @@ import FBSDKCoreKit
 import Firebase
 
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
    
     
     let loginManager = LoginManager()
@@ -33,6 +33,10 @@ class ViewController: UIViewController {
         
 
         super.viewDidLoad()
+        
+        self.emailTextField.delegate    = self
+        self.passwordTextfield.delegate = self
+        
 
         print(self.view.bounds.maxY)
 
@@ -161,6 +165,24 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        print(textField.tag)
+       // textField.viewWithTag(textField.tag + 1)
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField{
+            print("next first responder found")
+            nextField.becomeFirstResponder()
+        } else {
+            // Not found, so remove keyboard.
+            textField.resignFirstResponder()
+        }
+        // Do not add a line break
+        return false
     }
     
     
