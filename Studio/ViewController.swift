@@ -74,15 +74,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         emailTextField.isHidden    = false
         passwordTextfield.isHidden = false
-        
-      //  self.emailTextField.center    = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 100)
-     //   self.passwordTextfield.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 100)
 
-       // self.appnameLabel.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 100)
 
         switch (sender as! UIButton).tag {
         case 0:
-            (sender as! UIButton).tag = 1
             
             self.appnameLabel.removeConstraint(centerYConstraint)
 
@@ -96,7 +91,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             hideButton(button: loginWithFBUIBtn, hide: true)
             hideButton(button: singUpBtn, hide: true)
 
-            
+            (sender as! UIButton).tag = 1
+
 
             break;
         case 1:
@@ -105,13 +101,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             
             
-            if (emailTextField.text != nil && passwordTextfield.text != nil){
+            if ((emailTextField.text != nil || emailTextField.text != "") && (passwordTextfield.text != nil || passwordTextfield.text != "")){
                 FIRAuth.auth()?.signIn(withEmail: emailTextField.text!, password: passwordTextfield.text!) { (user, error) in
                     if (error != nil){
-                        (sender as! UIButton).tag = 1
+                        //(sender as! UIButton).tag = 0
                         print("There was a problem authenticating given user. Perhaps it doesnt exist, or password/email is incorrent")
                         self.hideButton(button: self.loginWithFBUIBtn, hide: false)
                         self.hideButton(button: self.singUpBtn, hide: false)
+                        self.emailTextField.isHidden    = true
+                        self.passwordTextfield.isHidden = true
+                        self.emailTextField.text = ""
+                        self.passwordTextfield.text = ""
                         return
                     }
                     
@@ -181,13 +181,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
+                self.view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+     
 
         if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField{
             print("next first responder found")
+            
             nextField.becomeFirstResponder()
             
         } else {
@@ -195,6 +197,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             textField.resignFirstResponder()
         }
         // Do not add a line break
+     
         return true
     }
     
