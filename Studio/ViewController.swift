@@ -25,6 +25,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var emailTextField   : UITextField!
     @IBOutlet var passwordTextfield: UITextField!
+    @IBOutlet var confirmPasswordTextfield: UITextField!
     
     @IBOutlet var appnameLabel: UILabel!
     @IBOutlet var errorPrompt: UILabel!
@@ -94,10 +95,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             break;
         case 1:
             (sender as! UIButton).tag = 0
-            
-            
-            
-            
             if ((emailTextField.text != nil || emailTextField.text != "") && (passwordTextfield.text != nil || passwordTextfield.text != "")){
                 FIRAuth.auth()?.signIn(withEmail: emailTextField.text!, password: passwordTextfield.text!) { (user, error) in
                     if (error != nil){
@@ -109,6 +106,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         self.passwordTextfield.isHidden = true
                         self.emailTextField.text = ""
                         self.passwordTextfield.text = ""
+                        self.errorPrompt.text = "The email or password entered is incorrect. It could also be that the user doesn't exist. Please try again."
                         self.errorPrompt.isHidden = false
                         return
                     }
@@ -138,8 +136,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
             switch loginResult {
             case .failed(let error):
                 print(error)
+                self.errorPrompt.text = "There was an error. You need to authorize Studio to access your Facebook information. Try again."
+                self.errorPrompt.isHidden = false
             case .cancelled:
                 print("User cancelled login.")
+                self.errorPrompt.text = "There was an error. You need to authorize Studio to access your Facebook information. Try again."
+                self.errorPrompt.isHidden = false
             case .success(let grantedPermissions, let declinedPermissions, let accessToken):
                 
                 self.hideButton(button: self.loginWithFBUIBtn, hide: true)
