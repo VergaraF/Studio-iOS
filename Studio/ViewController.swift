@@ -209,9 +209,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     FIRAuth.auth()?.createUser(withEmail: emailTextField.text!, password: passwordTextfield.text!) { (user, error) in
                         if (error != nil){
                             print("something went wrong creating the user, perhaps the email already exists")
+                            self.errorPrompt.isHidden = true
                             return
                         }
                         
+                        print("user created and logged in")
                         UserDefaults.standard.set(user?.displayName, forKey: "username")
                         UserDefaults.standard.set(user?.uid, forKey: "uid")
                         
