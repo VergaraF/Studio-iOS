@@ -27,8 +27,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var passwordTextfield: UITextField!
     
     @IBOutlet var appnameLabel: UILabel!
-
-    @IBOutlet var centerYConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         
@@ -79,13 +77,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         switch (sender as! UIButton).tag {
         case 0:
             
-            self.appnameLabel.removeConstraint(centerYConstraint)
-
             if self.view.bounds.maxY < 600{
                 print("true")
-                self.appnameLabel.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 140)
+               // self.appnameLabel.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 140)
             }else{
-                self.appnameLabel.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 80)
+              //  self.appnameLabel.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 80)
 
             }
             hideButton(button: loginWithFBUIBtn, hide: true)

@@ -50,15 +50,6 @@
                                     <action selector="loginWithFBAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iSh-jz-d4V"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Studio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prP-WV-s04">
-                                <rect key="frame" x="47.5" y="197" width="225" height="86"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="86" id="2Xe-Jl-GmP"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="66"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ir8-sq-Sec">
                                 <rect key="frame" x="16" y="425" width="288" height="40"/>
                                 <color key="backgroundColor" red="0.86282563209533691" green="0.88385415077209473" blue="0.77224045991897583" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -88,6 +79,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Studio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prP-WV-s04">
+                                <rect key="frame" x="47.5" y="59" width="225" height="86"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="86" id="2Xe-Jl-GmP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="66"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.4264252781867981" green="0.0" blue="0.044716805219650269" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -100,11 +100,11 @@
                             <constraint firstItem="ir8-sq-Sec" firstAttribute="leading" secondItem="eNu-HO-MdH" secondAttribute="leading" id="Jvs-o8-BEV"/>
                             <constraint firstItem="Mkg-dj-Dkm" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="M3r-FS-nct"/>
                             <constraint firstItem="Mkg-dj-Dkm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="MbI-aD-uRA"/>
-                            <constraint firstItem="prP-WV-s04" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="QUZ-ni-6r5"/>
                             <constraint firstItem="eNu-HO-MdH" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Sgh-Ug-M2B"/>
                             <constraint firstItem="T40-RB-jTT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="WUW-ci-CPL"/>
                             <constraint firstItem="eNu-HO-MdH" firstAttribute="top" secondItem="lXT-Fw-f1S" secondAttribute="bottom" constant="8" id="WXF-bZ-kdm"/>
                             <constraint firstItem="lXT-Fw-f1S" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Zl3-mN-xOd"/>
+                            <constraint firstItem="T40-RB-jTT" firstAttribute="top" secondItem="prP-WV-s04" secondAttribute="bottom" constant="8" id="ZxK-CK-ziU"/>
                             <constraint firstItem="Mkg-dj-Dkm" firstAttribute="top" secondItem="T40-RB-jTT" secondAttribute="bottom" constant="1" id="Zyz-zh-7Tc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="prP-WV-s04" secondAttribute="trailing" constant="31.5" id="bcm-qX-8Ij"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ir8-sq-Sec" secondAttribute="bottom" constant="15" id="nUy-qw-vh8"/>
@@ -116,7 +116,6 @@
                     </view>
                     <connections>
                         <outlet property="appnameLabel" destination="prP-WV-s04" id="sCg-z4-IMu"/>
-                        <outlet property="centerYConstraint" destination="QUZ-ni-6r5" id="xZd-Ec-Dtr"/>
                         <outlet property="emailTextField" destination="T40-RB-jTT" id="Iu0-0C-dK6"/>
                         <outlet property="loginWithFBUIBtn" destination="lXT-Fw-f1S" id="KCq-ZW-YTf"/>
                         <outlet property="passwordTextfield" destination="Mkg-dj-Dkm" id="ypQ-el-DGG"/>
