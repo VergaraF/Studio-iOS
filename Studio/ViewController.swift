@@ -22,6 +22,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var regularLoginBtn : UIButton!
     @IBOutlet var loginWithFBUIBtn: UIButton!
     @IBOutlet var singUpBtn       : UIButton!
+    var oldSignUpBtn = UIButton()
     
     @IBOutlet var emailTextField   : UITextField!
     @IBOutlet var passwordTextfield: UITextField!
@@ -37,9 +38,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.emailTextField.delegate    = self
         self.passwordTextfield.delegate = self
         
-
-        print(self.view.bounds.maxY)
-
+        oldSignUpBtn = singUpBtn
+        
         if (FBSDKAccessToken.current() != nil) {
             print("you're logged")
             
@@ -77,17 +77,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         switch (sender as! UIButton).tag {
         case 0:
-            
-            if self.view.bounds.maxY < 600{
-                print("true")
-               // self.appnameLabel.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 140)
-            }else{
-              //  self.appnameLabel.center = CGPoint(x: self.appnameLabel.center.x, y: self.appnameLabel.center.y - 80)
-
-            }
             hideButton(button: loginWithFBUIBtn, hide: true)
             hideButton(button: singUpBtn, hide: true)
             self.errorPrompt.isHidden = true
+            regularLoginBtn.setTitle("GO", for: .normal)
 
             (sender as! UIButton).tag = 1
 
@@ -108,6 +101,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         self.passwordTextfield.text = ""
                         self.errorPrompt.text = "The email or password entered is incorrect. It could also be that the user doesn't exist. Please try again."
                         self.errorPrompt.isHidden = false
+                        self.regularLoginBtn.setTitle("Login", for: .normal)
+
                         return
                     }
                     
@@ -116,7 +111,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }
 
             }else{
-                print("no empty email or password is allow")
+                print("no empty email or password is allowed")
             }
             
 
@@ -164,6 +159,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     }else{
                         UserDefaults.standard.set(user?.displayName, forKey: "username")
                         UserDefaults.standard.set(user?.uid, forKey: "uid")
+                        
+                        //Segue to ARE YOU A TUTOR OR STUDENT VIEW?
+                        
                         UserDefaults.standard.set(false, forKey: "isTutor")
                         
                         //SEGUEY to choose whether the user is a TUTOR or STUDENT
@@ -173,6 +171,68 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 
             }
         }
+    }
+    
+    
+    
+    @IBAction func signUpAction(_ sender: Any) {
+        hideButton(button: loginWithFBUIBtn, hide: true)
+        hideButton(button: regularLoginBtn, hide: true)
+        
+        switch (sender as! UIButton).tag {
+        case 0:
+            emailTextField.isHidden           = false
+            passwordTextfield.isHidden        = false
+            confirmPasswordTextfield.isHidden = false
+            
+            singUpBtn.setTitle("GO", for: .normal)
+            singUpBtn.backgroundColor = UIColor.green
+            singUpBtn.setTitleColor(UIColor.white, for: .normal)
+            
+            (sender as! UIButton).tag = 1
+            
+            break;
+        case 1:
+            singUpBtn = oldSignUpBtn
+
+            if (passwordTextfield.text != nil && confirmPasswordTextfield.text != nil && emailTextField.text != nil ){
+                if (passwordTextfield.text != confirmPasswordTextfield.text){
+                    errorPrompt.text = "You must enter the same password twice. Please try again."
+                    errorPrompt.isHidden = false
+                    break
+                }else{
+                    FIRAuth.auth()?.createUser(withEmail: emailTextField.text!, password: passwordTextfield.text!) { (user, error) in
+                        if (error != nil){
+                            print("something went wrong creating the user, perhaps the email already exists")
+                            return
+                        }
+                        
+                        UserDefaults.standard.set(user?.displayName, forKey: "username")
+                        UserDefaults.standard.set(user?.uid, forKey: "uid")
+                        
+                        //Segue to ARE YOU A TUTOR OR STUDENT VIEW?
+                        
+                        UserDefaults.standard.set(false, forKey: "isTutor")
+                        
+                        //SEGUEY to choose whether the user is a TUTOR or STUDENT
+                    }
+                }
+                
+            }else{
+                errorPrompt.text = "You cannot leave any field empty. Please try again with a valid input."
+                errorPrompt.isHidden = false
+                
+                break
+            }
+            
+        default:
+            print("signing up ayyyy")
+        }
+       
+        
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -185,12 +245,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
-     
 
-        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField{
+        let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField
+        if (nextField != nil && textField.tag != 21 && regularLoginBtn.tag != 1){
             print("next first responder found")
             
-            nextField.becomeFirstResponder()
+            nextField?.becomeFirstResponder()
             
         } else {
             // Not found, so remove keyboard.
