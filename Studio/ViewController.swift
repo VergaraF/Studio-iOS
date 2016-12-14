@@ -35,8 +35,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.emailTextField.delegate    = self
-        self.passwordTextfield.delegate = self
+        self.emailTextField.delegate           = self
+        self.passwordTextfield.delegate        = self
+        self.confirmPasswordTextfield.delegate = self
         
         oldSignUpBtn = singUpBtn
         
@@ -179,6 +180,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         hideButton(button: loginWithFBUIBtn, hide: true)
         hideButton(button: regularLoginBtn, hide: true)
         
+        errorPrompt.isHidden = false
+        
         switch (sender as! UIButton).tag {
         case 0:
             emailTextField.isHidden           = false
@@ -186,10 +189,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
             confirmPasswordTextfield.isHidden = false
             
             singUpBtn.setTitle("GO", for: .normal)
-            singUpBtn.backgroundColor = UIColor.green
+            singUpBtn.backgroundColor = regularLoginBtn.backgroundColor
             singUpBtn.setTitleColor(UIColor.white, for: .normal)
             
             (sender as! UIButton).tag = 1
+            
+            errorPrompt.isHidden = true
             
             break;
         case 1:
@@ -247,15 +252,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool{
 
         let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField
-        if (nextField != nil && textField.tag != 21 && regularLoginBtn.tag != 1){
+        if nextField != nil{
+            if nextField?.tag == 22 && singUpBtn.tag == 0{
+                print("resigning first responder")
+                textField.resignFirstResponder()
+                return true
+            }
             print("next first responder found")
-            
             nextField?.becomeFirstResponder()
-            
-        } else {
-            // Not found, so remove keyboard.
-            textField.resignFirstResponder()
+            return true
         }
+       
+            // Not found, so remove keyboard.
+            print("resigning first responder")
+            textField.resignFirstResponder()
+    
         // Do not add a line break
      
         return true
