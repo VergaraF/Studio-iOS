@@ -27,10 +27,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var passwordTextfield: UITextField!
     
     @IBOutlet var appnameLabel: UILabel!
+    @IBOutlet var errorPrompt: UILabel!
+
     
     override func viewDidLoad() {
-        
-
         super.viewDidLoad()
         
         self.emailTextField.delegate    = self
@@ -86,6 +86,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             hideButton(button: loginWithFBUIBtn, hide: true)
             hideButton(button: singUpBtn, hide: true)
+            self.errorPrompt.isHidden = true
 
             (sender as! UIButton).tag = 1
 
@@ -108,6 +109,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         self.passwordTextfield.isHidden = true
                         self.emailTextField.text = ""
                         self.passwordTextfield.text = ""
+                        self.errorPrompt.isHidden = false
                         return
                     }
                     
