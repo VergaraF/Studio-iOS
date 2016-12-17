@@ -203,12 +203,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
             if (passwordTextfield.text != nil && confirmPasswordTextfield.text != nil && emailTextField.text != nil ){
                 if (passwordTextfield.text != confirmPasswordTextfield.text){
                     errorPrompt.text = "You must enter the same password twice. Please try again."
+                    passwordTextfield.text = ""
+                    confirmPasswordTextfield.text = ""
                     errorPrompt.isHidden = false
                     break
                 }else{
                     FIRAuth.auth()?.createUser(withEmail: emailTextField.text!, password: passwordTextfield.text!) { (user, error) in
                         if (error != nil){
                             print("something went wrong creating the user, perhaps the email already exists")
+                            
                             self.errorPrompt.isHidden = true
                             return
                         }
