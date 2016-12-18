@@ -41,7 +41,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         oldSignUpBtn = singUpBtn
         
-        if (FBSDKAccessToken.current() != nil) {
+        /*if (FBSDKAccessToken.current() != nil) {
             print("you're logged")
             
             hideButton(button: loginWithFBUIBtn, hide: true)
@@ -60,10 +60,35 @@ class ViewController: UIViewController, UITextFieldDelegate {
         } else {
             print("you're NOT logged")
         }
-        
+         */
 
        
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if let user = FIRAuth.auth()?.currentUser {
+            self.signedIn(user)
+        }
+    }
+    
+    func signedIn(_ user: FIRUser?) {
+        
+        UserDefaults.standard.set(user?.displayName, forKey: "username")
+        UserDefaults.standard.set(user?.uid, forKey: "uid")
+        
+        //Get from API if user is tutor 
+        
+        
+      /*  MeasurementHelper.sendLoginEvent()
+        
+        AppState.sharedInstance.displayName = user?.displayName ?? user?.email
+        AppState.sharedInstance.photoURL = user?.photoURL
+        AppState.sharedInstance.signedIn = true */
+ 
+        let notificationName = Notification.Name(rawValue: "You're signed in")
+        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)
+       // performSegue(withIdentifier: Constants.Segues.SignInToFp, sender: nil)
     }
     
     private func hideButton(button: UIButton, hide: Bool){
