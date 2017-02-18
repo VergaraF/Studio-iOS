@@ -21,23 +21,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let loginManager = LoginManager()
     let iphoneFiveYMax = 568
     
-    @IBOutlet var regularLoginBtn : UIButton!
-    @IBOutlet var loginWithFBUIBtn: UIButton!
-    @IBOutlet var singUpBtn       : UIButton!
-    @IBOutlet var backButton: UIButton!
-
-    //var oldSignUpBtn = UIButton()
+    @IBOutlet var regularLoginBtn  : UIButton!
+    @IBOutlet var loginWithFBUIBtn : UIButton!
+    @IBOutlet var singUpBtn        : UIButton!
+    @IBOutlet var backButton       : UIButton!
     
     var oldSignUpBtnBackgroundColour = UIColor()
     var oldSignUpBtnTitle            = String()
     var oldSignUpBtnTitleColour      = UIColor()
     
-    @IBOutlet var emailTextField   : UITextField!
-    @IBOutlet var passwordTextfield: UITextField!
-    @IBOutlet var confirmPasswordTextfield: UITextField!
+    @IBOutlet var emailTextField           : UITextField!
+    @IBOutlet var passwordTextfield        : UITextField!
+    @IBOutlet var confirmPasswordTextfield : UITextField!
     
-    @IBOutlet var appnameLabel: UILabel!
-    @IBOutlet var errorPrompt: UILabel!
+    @IBOutlet var appnameLabel : UILabel!
+    @IBOutlet var errorPrompt  : UILabel!
 
     
     override func viewDidLoad() {
@@ -46,8 +44,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.emailTextField.delegate           = self
         self.passwordTextfield.delegate        = self
         self.confirmPasswordTextfield.delegate = self
-        
-        //oldSignUpBtn = singUpBtn
         
         oldSignUpBtnBackgroundColour = singUpBtn.backgroundColor!
         oldSignUpBtnTitle            = singUpBtn.title(for: .normal)!
@@ -139,9 +135,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         singUpBtn.setTitle(oldSignUpBtnTitle, for: .normal)
         
         regularLoginBtn.tag = 0
-        singUpBtn.tag = 0
-
-        
+        singUpBtn.tag       = 0
 
     }
     @IBAction func regularLoginAction(_ sender: Any) {
@@ -206,6 +200,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         
     }
+    
+    
     @IBAction func loginWithFBAction(_ sender: Any) {
         
         let alert = SCLAlertView()
@@ -394,11 +390,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
      
         return true
     }
-    
-    
-    
-    
-
 
 }
 
