@@ -14,18 +14,23 @@ import Firebase
 import SCLAlertView
 
 
+
 class ViewController: UIViewController, UITextFieldDelegate {
    
     
     let loginManager = LoginManager()
     let iphoneFiveYMax = 568
     
-    let alert = SCLAlertView()
-    
     @IBOutlet var regularLoginBtn : UIButton!
     @IBOutlet var loginWithFBUIBtn: UIButton!
     @IBOutlet var singUpBtn       : UIButton!
-    var oldSignUpBtn = UIButton()
+    @IBOutlet var backButton: UIButton!
+
+    //var oldSignUpBtn = UIButton()
+    
+    var oldSignUpBtnBackgroundColour = UIColor()
+    var oldSignUpBtnTitle            = String()
+    var oldSignUpBtnTitleColour      = UIColor()
     
     @IBOutlet var emailTextField   : UITextField!
     @IBOutlet var passwordTextfield: UITextField!
@@ -42,7 +47,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.passwordTextfield.delegate        = self
         self.confirmPasswordTextfield.delegate = self
         
-        oldSignUpBtn = singUpBtn
+        //oldSignUpBtn = singUpBtn
+        
+        oldSignUpBtnBackgroundColour = singUpBtn.backgroundColor!
+        oldSignUpBtnTitle            = singUpBtn.title(for: .normal)!
+        oldSignUpBtnTitleColour      = singUpBtn.titleColor(for: .normal)!
+        
         
         /*if (FBSDKAccessToken.current() != nil) {
             print("you're logged")
@@ -51,6 +61,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             hideButton(button: regularLoginBtn,  hide: true)
             
             let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+         @IBAction func backButtonAction(_ sender: Any) {
+         }
             
             FIRAuth.auth()?.signIn(with: credential) { (user, error) in
                 if error != nil {
@@ -97,12 +109,36 @@ class ViewController: UIViewController, UITextFieldDelegate {
     private func hideButton(button: UIButton, hide: Bool){
         button.isHidden = hide
     }
+    
+    private func goBack(){
+        hideButton(button: loginWithFBUIBtn, hide: false)
+        hideButton(button: singUpBtn, hide: false)
+        hideButton(button: regularLoginBtn, hide: false)
+        emailTextField.isHidden    = true
+        passwordTextfield.isHidden = true
+        confirmPasswordTextfield.isHidden = true
+        errorPrompt.isHidden = false
+        
+        regularLoginBtn.setTitle("Login", for: .normal)
+        errorPrompt.text = ""
+        passwordTextfield.text = ""
+        confirmPasswordTextfield.text = ""
+        emailTextField.text = ""
+        
+        singUpBtn.backgroundColor = oldSignUpBtnBackgroundColour
+        singUpBtn.setTitleColor(oldSignUpBtnTitleColour, for: .normal)
+        singUpBtn.setTitle(oldSignUpBtnTitle, for: .normal)
+        
+
+    }
     @IBAction func regularLoginAction(_ sender: Any) {
         print("regular login")
         
         emailTextField.isHidden    = false
         passwordTextfield.isHidden = false
+        hideButton(button: backButton, hide: false)
 
+        let alert = SCLAlertView()
 
         switch (sender as! UIButton).tag {
         case 0:
@@ -123,27 +159,28 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         //(sender as! UIButton).tag = 0
                         
                         print("There was a problem authenticating given user. Perhaps it doesnt exist, or password/email is incorrent")
-                        self.hideButton(button: self.loginWithFBUIBtn, hide: false)
-                        self.hideButton(button: self.singUpBtn, hide: false)
-                        self.emailTextField.isHidden    = true
-                        self.passwordTextfield.isHidden = true
+                        
                         self.emailTextField.text = ""
                         self.passwordTextfield.text = ""
                         self.errorPrompt.text = "The email or password entered is incorrect. It could also be that the user doesn't exist."
                         self.errorPrompt.isHidden = false
-                        self.regularLoginBtn.setTitle("Login", for: .normal)
-                        self.alert.showError("Something went wrong :(", subTitle: "The email or password entered is incorrect. It could also be that the user doesn't exist. Please try again.")
+                        self.goBack()
+                        self.hideButton(button: self.backButton, hide: true)
+                        
+                        alert.showError("Something went wrong :(", subTitle: "The email or password entered is incorrect. It could also be that the user doesn't exist. Please try again.")
 
                         return
                     }
                     
+                    self.hideButton(button: self.backButton, hide: true)
+
                     UserDefaults.standard.set(user?.displayName, forKey: "username")
                     UserDefaults.standard.set(user?.uid, forKey: "uid")
                 }
 
             }else{
                 print("no empty email or password is allowed")
-                self.alert.showError("Something went wrong :(", subTitle: "No empty email or password is allowed. Pleasy try again.")
+                alert.showError("Something went wrong :(", subTitle: "No empty email or password is allowed. Pleasy try again.")
             }
             
 
@@ -158,23 +195,34 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     @IBAction func loginWithFBAction(_ sender: Any) {
         
+        let alert = SCLAlertView()
+
+        
         loginManager.logIn([.publicProfile, .email], viewController: self) { loginResult in
        
             switch loginResult {
+                
             case .failed(let error):
                 print(error)
-                self.alert.showError("Something went wrong :(", subTitle: "You need to authorize Studio to access your Facebook information. Try again.")
+                
+                alert.showError("Something went wrong :(", subTitle: "You need to authorize Studio to access your Facebook information. Try again.")
+               
                 self.errorPrompt.text = "There was an error. You need to authorize Studio to access your Facebook information. Try again."
                 self.errorPrompt.isHidden = false
+                
             case .cancelled:
-                self.alert.showError("Something went wrong :(", subTitle: "It seems you cancelled login. You need to authorize Studio to access your Facebook information. Try again.")
+                alert.showError("Something went wrong :(", subTitle: "It seems you cancelled login. You need to authorize Studio to access your Facebook information. Try again.")
+                
                 print("User cancelled login.")
                 self.errorPrompt.text = "There was an error. You need to authorize Studio to access your Facebook information. Try again."
                 self.errorPrompt.isHidden = false
+                
             case .success(let grantedPermissions, let declinedPermissions, let accessToken):
                 
                 self.hideButton(button: self.loginWithFBUIBtn, hide: true)
                 self.hideButton(button: self.regularLoginBtn,  hide: true)
+                self.hideButton(button: self.backButton, hide: true)
+
 
                 
                 //Create user with info
@@ -185,13 +233,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         print("there was an error authenticating in firebase")
                         return
                     }
+                    self.hideButton(button: self.backButton, hide: true)
+
                     print("Logged IN FIREBASE using Login With Facebook!")
                     if UserDefaults.standard.object(forKey: "uid") != nil{
                         print("move on, the guy is just loggin again. NOT for the first time")
-                        self.alert.showSuccess("Welcome back", subTitle: "You will be taken to our tutors hub shortly")
+                        
+                        alert.showSuccess("Welcome back", subTitle: "You will be taken to our tutors hub shortly")
+
                         //SEGUEY TO TUTOR CARDS
                         
                     }else{
+                        
                         UserDefaults.standard.set(user?.displayName, forKey: "username")
                         UserDefaults.standard.set(user?.uid, forKey: "uid")
                         
@@ -211,10 +264,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func signUpAction(_ sender: Any) {
+        hideButton(button: backButton, hide: false)
+
         hideButton(button: loginWithFBUIBtn, hide: true)
         hideButton(button: regularLoginBtn, hide: true)
         
         errorPrompt.isHidden = false
+        
+        let alert = SCLAlertView()
         
         switch (sender as! UIButton).tag {
         case 0:
@@ -231,12 +288,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
             errorPrompt.isHidden = true
             
             break;
+            
         case 1:
-            singUpBtn = oldSignUpBtn
+           // singUpBtn = oldSignUpBtn
 
             if (passwordTextfield.text != nil && confirmPasswordTextfield.text != nil && emailTextField.text != nil ){
                 if (passwordTextfield.text != confirmPasswordTextfield.text){
-                    self.alert.showError("Something went wrong :(", subTitle: "You must enter the same password twice. Please try again.")
+                    
+                    alert.showError("Something went wrong :(", subTitle: "You must enter the same password twice. Please try again.")
+                    
                     errorPrompt.text = "You must enter the same password twice. Please try again."
                     passwordTextfield.text = ""
                     confirmPasswordTextfield.text = ""
@@ -245,14 +305,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }else{
                     FIRAuth.auth()?.createUser(withEmail: emailTextField.text!, password: passwordTextfield.text!) { (user, error) in
                         if (error != nil){
-                            self.alert.showError("Something went wrong :(", subTitle: "The email already exists OR it is not a valid email. \n\nIf you already registered, please log in instead. If not, use another email. \n\nIf you're the legit owner of this email address, contact our team.")
+                            
+                            alert.showError("Something went wrong :(", subTitle: "The email already exists OR it is not a valid email. \n\nIf you already registered, please log in instead. If not, use another email. \n\nIf you're the legit owner of this email address, contact our team.")
 
                             print("something went wrong creating the user, perhaps the email already exists")
                             
                             self.errorPrompt.isHidden = true
                             return
                         }
-                        
+                        //Everything went smooth
+                        self.hideButton(button: self.backButton, hide: true)
+
                         print("user created and logged in")
                         UserDefaults.standard.set(user?.displayName, forKey: "username")
                         UserDefaults.standard.set(user?.uid, forKey: "uid")
@@ -266,7 +329,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }
                 
             }else{
-                self.alert.showError("Something went wrong :(", subTitle: "You cannot leave any field empty. Please try again with a valid input.")
+                
+                alert.showError("Something went wrong :(", subTitle: "You cannot leave any field empty. Please try again with a valid input.")
+                
                 errorPrompt.text = "You cannot leave any field empty. Please try again with a valid input."
                 errorPrompt.isHidden = false
                 
@@ -276,11 +341,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         default:
             print("signing up ayyyy")
         }
-       
         
-        
-        
-        
+    }
+    
+    @IBAction func backButtonAction(_ sender: Any) {
+        goBack()
     }
 
     override func didReceiveMemoryWarning() {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B0DC6C81E581C230053B038 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B0DC6C71E581C230053B038 /* back.png */; };
 		1B7950411DFCFEC500F73658 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B7950401DFCFEC500F73658 /* GoogleService-Info.plist */; };
 		1BABDD2D1DFCEF09000217F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BABDD2C1DFCEF09000217F2 /* AppDelegate.swift */; };
 		1BABDD2F1DFCEF09000217F2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BABDD2E1DFCEF09000217F2 /* ViewController.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		0C1E3A3CEAC836E5C190DA36 /* Pods-StudioTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudioTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudioTests/Pods-StudioTests.release.xcconfig"; sourceTree = "<group>"; };
+		1B0DC6C71E581C230053B038 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back.png; path = Assets/back.png; sourceTree = "<group>"; };
 		1B2A879B1DFE313D00438821 /* Studio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Studio.entitlements; sourceTree = "<group>"; };
 		1B7950401DFCFEC500F73658 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1BABDD291DFCEF09000217F2 /* Studio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Studio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				1B2A879B1DFE313D00438821 /* Studio.entitlements */,
+				1B0DC6C71E581C230053B038 /* back.png */,
 				1BABDD2C1DFCEF09000217F2 /* AppDelegate.swift */,
 				1BABDD2E1DFCEF09000217F2 /* ViewController.swift */,
 				1BABDD301DFCEF09000217F2 /* Main.storyboard */,
@@ -297,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BABDD371DFCEF09000217F2 /* LaunchScreen.storyboard in Resources */,
+				1B0DC6C81E581C230053B038 /* back.png in Resources */,
 				1B7950411DFCFEC500F73658 /* GoogleService-Info.plist in Resources */,
 				1BABDD341DFCEF09000217F2 /* Assets.xcassets in Resources */,
 				1BABDD321DFCEF09000217F2 /* Main.storyboard in Resources */,
