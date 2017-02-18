@@ -114,20 +114,33 @@ class ViewController: UIViewController, UITextFieldDelegate {
         hideButton(button: loginWithFBUIBtn, hide: false)
         hideButton(button: singUpBtn, hide: false)
         hideButton(button: regularLoginBtn, hide: false)
-        emailTextField.isHidden    = true
-        passwordTextfield.isHidden = true
+        hideButton(button: backButton, hide: true)
+        
+        emailTextField.isHidden           = true
+        passwordTextfield.isHidden        = true
         confirmPasswordTextfield.isHidden = true
-        errorPrompt.isHidden = false
+        
+        if (regularLoginBtn.tag == 1 || singUpBtn.tag == 1){
+            errorPrompt.isHidden = true
+
+        }else{
+            errorPrompt.isHidden = false
+
+        }
         
         regularLoginBtn.setTitle("Login", for: .normal)
-        errorPrompt.text = ""
-        passwordTextfield.text = ""
+        
+        passwordTextfield.text        = ""
         confirmPasswordTextfield.text = ""
-        emailTextField.text = ""
+        emailTextField.text           = ""
         
         singUpBtn.backgroundColor = oldSignUpBtnBackgroundColour
         singUpBtn.setTitleColor(oldSignUpBtnTitleColour, for: .normal)
         singUpBtn.setTitle(oldSignUpBtnTitle, for: .normal)
+        
+        regularLoginBtn.tag = 0
+        singUpBtn.tag = 0
+
         
 
     }
@@ -209,6 +222,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                
                 self.errorPrompt.text = "There was an error. You need to authorize Studio to access your Facebook information. Try again."
                 self.errorPrompt.isHidden = false
+                self.goBack()
                 
             case .cancelled:
                 alert.showError("Something went wrong :(", subTitle: "It seems you cancelled login. You need to authorize Studio to access your Facebook information. Try again.")
@@ -216,6 +230,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 print("User cancelled login.")
                 self.errorPrompt.text = "There was an error. You need to authorize Studio to access your Facebook information. Try again."
                 self.errorPrompt.isHidden = false
+                self.goBack()
                 
             case .success(let grantedPermissions, let declinedPermissions, let accessToken):
                 
@@ -310,7 +325,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
                             print("something went wrong creating the user, perhaps the email already exists")
                             
-                            self.errorPrompt.isHidden = true
+                            //self.errorPrompt.isHidden = false
                             return
                         }
                         //Everything went smooth
