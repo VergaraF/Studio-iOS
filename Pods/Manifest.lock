@@ -60,6 +60,7 @@ PODS:
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
+  - SCLAlertView (0.7.0)
 
 DEPENDENCIES:
   - CreditCardForm
@@ -69,6 +70,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - JSQMessagesViewController
+  - SCLAlertView
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -89,7 +91,8 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
 
-PODFILE CHECKSUM: fc85d977b71f659658ecf03c36c09cdccea6d037
+PODFILE CHECKSUM: c3fe41897fa06d51a2166990f930a816c27dfe1c
 
 COCOAPODS: 1.1.1

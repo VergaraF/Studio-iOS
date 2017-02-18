@@ -14,6 +14,7 @@ target 'Studio' do
   pod 'Firebase/Database'
   pod 'FacebookCore'
   pod 'FacebookLogin'
+  pod 'SCLAlertView'
 
   target 'StudioTests' do
     inherit! :search_paths

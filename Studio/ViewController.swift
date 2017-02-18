@@ -11,6 +11,7 @@ import FacebookCore
 import FacebookLogin
 import FBSDKCoreKit
 import Firebase
+import SCLAlertView
 
 
 class ViewController: UIViewController, UITextFieldDelegate {
@@ -18,6 +19,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     let loginManager = LoginManager()
     let iphoneFiveYMax = 568
+    
+    let alert = SCLAlertView()
     
     @IBOutlet var regularLoginBtn : UIButton!
     @IBOutlet var loginWithFBUIBtn: UIButton!
@@ -118,6 +121,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 FIRAuth.auth()?.signIn(withEmail: emailTextField.text!, password: passwordTextfield.text!) { (user, error) in
                     if (error != nil){
                         //(sender as! UIButton).tag = 0
+                        
                         print("There was a problem authenticating given user. Perhaps it doesnt exist, or password/email is incorrent")
                         self.hideButton(button: self.loginWithFBUIBtn, hide: false)
                         self.hideButton(button: self.singUpBtn, hide: false)
@@ -128,6 +132,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         self.errorPrompt.text = "The email or password entered is incorrect. It could also be that the user doesn't exist. Please try again."
                         self.errorPrompt.isHidden = false
                         self.regularLoginBtn.setTitle("Login", for: .normal)
+                        self.alert.showError("ERROR", subTitle: "The email or password entered is incorrect. It could also be that the user doesn't exist. Please try again.")
 
                         return
                     }
@@ -138,6 +143,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
             }else{
                 print("no empty email or password is allowed")
+                self.alert.showError("ERROR", subTitle: "No empty email or password is allowed. Pleasy try again.")
             }
             
 
@@ -157,9 +163,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             switch loginResult {
             case .failed(let error):
                 print(error)
+                self.alert.showError("ERROR", subTitle: "There was an error. You need to authorize Studio to access your Facebook information. Try again.")
                 self.errorPrompt.text = "There was an error. You need to authorize Studio to access your Facebook information. Try again."
                 self.errorPrompt.isHidden = false
             case .cancelled:
+                self.alert.showError("ERROR", subTitle: "It seems you cancelled login. You need to authorize Studio to access your Facebook information. Try again.")
                 print("User cancelled login.")
                 self.errorPrompt.text = "There was an error. You need to authorize Studio to access your Facebook information. Try again."
                 self.errorPrompt.isHidden = false
@@ -180,6 +188,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     print("Logged IN FIREBASE using Login With Facebook!")
                     if UserDefaults.standard.object(forKey: "uid") != nil{
                         print("move on, the guy is just loggin again. NOT for the first time")
+                        self.alert.showSuccess("Welcome back", subTitle: "You will be taken to our tutors hub shortly")
                         //SEGUEY TO TUTOR CARDS
                         
                     }else{
@@ -227,6 +236,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
             if (passwordTextfield.text != nil && confirmPasswordTextfield.text != nil && emailTextField.text != nil ){
                 if (passwordTextfield.text != confirmPasswordTextfield.text){
+                    self.alert.showError("ERROR", subTitle: "You must enter the same password twice. Please try again.")
                     errorPrompt.text = "You must enter the same password twice. Please try again."
                     passwordTextfield.text = ""
                     confirmPasswordTextfield.text = ""
@@ -235,6 +245,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }else{
                     FIRAuth.auth()?.createUser(withEmail: emailTextField.text!, password: passwordTextfield.text!) { (user, error) in
                         if (error != nil){
+                            self.alert.showError("Something went wrong :(", subTitle: "Something went wrong creating the user, perhaps the email already exists OR it is not a valid email. \nIf you already registered, please log in instead. If not, use another email. \nIf you're the legit owner of this email address, contact our team.")
+
                             print("something went wrong creating the user, perhaps the email already exists")
                             
                             self.errorPrompt.isHidden = true
@@ -254,6 +266,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }
                 
             }else{
+                self.alert.showError("ERROR", subTitle: "You cannot leave any field empty. Please try again with a valid input.")
                 errorPrompt.text = "You cannot leave any field empty. Please try again with a valid input."
                 errorPrompt.isHidden = false
                 
