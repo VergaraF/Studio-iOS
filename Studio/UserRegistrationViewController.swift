@@ -14,8 +14,7 @@ import Firebase
 import SCLAlertView
 
 
-
-class ViewController: UIViewController, UITextFieldDelegate {
+class UserRegistrationViewController: UIViewController, UITextFieldDelegate {
    
     
     let loginManager = LoginManager()
@@ -233,7 +232,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 self.hideButton(button: self.loginWithFBUIBtn, hide: true)
                 self.hideButton(button: self.regularLoginBtn,  hide: true)
                 self.hideButton(button: self.backButton, hide: true)
-
+                self.hideButton(button: self.singUpBtn, hide: true)
 
                 
                 //Create user with info
@@ -258,6 +257,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         
                         UserDefaults.standard.set(user?.displayName, forKey: "username")
                         UserDefaults.standard.set(user?.uid, forKey: "uid")
+                        
+                        
                         
                         //Segue to ARE YOU A TUTOR OR STUDENT VIEW?
                         
