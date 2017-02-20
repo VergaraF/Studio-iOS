@@ -289,11 +289,11 @@ class UserRegistrationViewController: UIViewController, UITextFieldDelegate {
         hideButton(button: loginWithFBUIBtn, hide: true)
         hideButton(button: regularLoginBtn, hide: true)
         
-        errorPrompt.isHidden = false
         
         let alert = SCLAlertView()
         
         switch (sender as! UIButton).tag {
+            
         case 0:
             emailTextField.isHidden           = false
             passwordTextfield.isHidden        = false
@@ -311,6 +311,8 @@ class UserRegistrationViewController: UIViewController, UITextFieldDelegate {
             
         case 1:
            // singUpBtn = oldSignUpBtn
+
+           // errorPrompt.isHidden = false
 
             if (passwordTextfield.text != nil && confirmPasswordTextfield.text != nil && emailTextField.text != nil ){
                 if (passwordTextfield.text != confirmPasswordTextfield.text){

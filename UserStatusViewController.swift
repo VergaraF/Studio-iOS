@@ -34,7 +34,7 @@ class UserStatusViewController: UIViewController{
         case 1:
             print("student")
             UserDefaults.standard.set(false, forKey: "isTutor")
-            self.performSegue(withIdentifier: "goToSubjects", sender: self)
+            self.performSegue(withIdentifier: "goToSubjectsForFirstTime", sender: self)
 
 //            break
         default:
