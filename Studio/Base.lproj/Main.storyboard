@@ -232,7 +232,7 @@
             </objects>
             <point key="canvasLocation" x="946.37681159420299" y="-205.43478260869566"/>
         </scene>
-        <!--Student Subjects Controller-->
+        <!--Subjects-->
         <scene sceneID="Nqe-gb-X4D">
             <objects>
                 <viewController id="5Qv-a2-7je" customClass="StudentSubjectsController" customModule="Studio" customModuleProvider="target" sceneMemberID="viewController">
@@ -245,9 +245,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="YFW-EN-33L">
-                        <barButtonItem key="leftBarButtonItem" image="menu-32.png" id="O6c-uU-1oI"/>
-                        <barButtonItem key="rightBarButtonItem" image="chat.png" id="WF2-ya-XqQ"/>
+                    <navigationItem key="navigationItem" title="Subjects" id="YFW-EN-33L">
+                        <barButtonItem key="leftBarButtonItem" image="menu-32.png" id="O6c-uU-1oI">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="chat.png" id="WF2-ya-XqQ">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXw-iI-J5v" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -264,6 +268,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="rvT-FK-ITc">
+                        <rect key="frame" x="0.0" y="692" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="5Qv-a2-7je" kind="relationship" relationship="rootViewController" id="43a-uW-hhy"/>
                     </connections>

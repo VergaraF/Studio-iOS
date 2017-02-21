@@ -23,6 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         
         
+        //UINavigationBar.appearance().barTintColor = UIColor.blue
+        UINavigationBar.appearance().barTintColor = UIColor(red: 0.42, green: 0.0, blue: 0.04, alpha: 1.0)
+       // UINavigationBar.appearance().
+        UINavigationBar.appearance().isTranslucent = false
+
+       // UIColor.
+        
         
         
         return true
