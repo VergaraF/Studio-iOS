@@ -170,7 +170,7 @@
                         <outlet property="regularLoginBtn" destination="eNu-HO-MdH" id="LSF-PG-FvZ"/>
                         <outlet property="singUpBtn" destination="ir8-sq-Sec" id="g3T-Zd-HER"/>
                         <segue destination="juW-BC-oK6" kind="show" identifier="isItTutorOrStudent" id="7EA-h1-BxR"/>
-                        <segue destination="5Qv-a2-7je" kind="show" identifier="goToSubjects" id="8Nf-lM-ooH"/>
+                        <segue destination="6Xd-vC-Dl0" kind="show" identifier="goToSubjects" id="8Nf-lM-ooH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -225,17 +225,17 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="5Qv-a2-7je" kind="show" identifier="goToSubjectForFirstTime" id="F7O-RC-lPW"/>
+                        <segue destination="6Xd-vC-Dl0" kind="show" identifier="goToSubjectForFirstTime" id="F7O-RC-lPW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vfO-nS-aav" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="946.37681159420299" y="-205.43478260869566"/>
         </scene>
-        <!--View Controller-->
+        <!--Student Subjects Controller-->
         <scene sceneID="Nqe-gb-X4D">
             <objects>
-                <viewController id="5Qv-a2-7je" sceneMemberID="viewController">
+                <viewController id="5Qv-a2-7je" customClass="StudentSubjectsController" customModule="Studio" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wgt-xE-Bu5"/>
                         <viewControllerLayoutGuide type="bottom" id="Qgg-Lp-Jf8"/>
@@ -245,17 +245,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="YFW-EN-33L">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="O6c-uU-1oI"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="WF2-ya-XqQ"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXw-iI-J5v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="947" y="554"/>
+            <point key="canvasLocation" x="1853.6231884057972" y="553.53260869565224"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="tL6-Lv-PAW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Xd-vC-Dl0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Veb-Hp-aP0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="5Qv-a2-7je" kind="relationship" relationship="rootViewController" id="43a-uW-hhy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RFX-Mu-QPh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="946.37681159420299" y="553.53260869565224"/>
         </scene>
     </scenes>
     <resources>
         <image name="back.png" width="54" height="92"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IY1-0a-ahn"/>
         <segue reference="F7O-RC-lPW"/>
+        <segue reference="IY1-0a-ahn"/>
     </inferredMetricsTieBreakers>
 </document>
