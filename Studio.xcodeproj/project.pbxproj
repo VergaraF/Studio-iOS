@@ -18,6 +18,10 @@
 		1BABDD421DFCEF09000217F2 /* StudioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BABDD411DFCEF09000217F2 /* StudioTests.swift */; };
 		1BABDD4D1DFCEF09000217F2 /* StudioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BABDD4C1DFCEF09000217F2 /* StudioUITests.swift */; };
 		1BC4C18F1E5C1F2F000AFF0D /* StudentSubjectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC4C18E1E5C1F2F000AFF0D /* StudentSubjectsController.swift */; };
+		1BC4C1911E5C2977000AFF0D /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BC4C1901E5C2977000AFF0D /* menu.png */; };
+		1BC4C1931E5C29D9000AFF0D /* menu-24.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BC4C1921E5C29D9000AFF0D /* menu-24.png */; };
+		1BC4C1951E5C29DE000AFF0D /* menu-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BC4C1941E5C29DE000AFF0D /* menu-32.png */; };
+		1BC4C1971E5C2A0D000AFF0D /* chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BC4C1961E5C2A0D000AFF0D /* chat.png */; };
 		373C666D5DCED959D8C86EAF /* Pods_StudioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74A754ABB31850E8E0044A33 /* Pods_StudioTests.framework */; };
 		504795979409323B74828C56 /* Pods_Studio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87393B530AE4C71218B0C579 /* Pods_Studio.framework */; };
 		E1A0F999B424AB5D0C4DAE59 /* Pods_StudioUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C274277BF08453F5C02C229 /* Pods_StudioUITests.framework */; };
@@ -60,6 +64,10 @@
 		1BABDD4C1DFCEF09000217F2 /* StudioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudioUITests.swift; sourceTree = "<group>"; };
 		1BABDD4E1DFCEF09000217F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BC4C18E1E5C1F2F000AFF0D /* StudentSubjectsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentSubjectsController.swift; sourceTree = "<group>"; };
+		1BC4C1901E5C2977000AFF0D /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
+		1BC4C1921E5C29D9000AFF0D /* menu-24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-24.png"; sourceTree = "<group>"; };
+		1BC4C1941E5C29DE000AFF0D /* menu-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-32.png"; sourceTree = "<group>"; };
+		1BC4C1961E5C2A0D000AFF0D /* chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat.png; sourceTree = "<group>"; };
 		1BE46C3C1DFDE13C0098A92E /* Studio-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Studio-Bridging-Header.h"; sourceTree = "<group>"; };
 		3546CF4A87660B1066E1D1D1 /* Pods-Studio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Studio.release.xcconfig"; path = "Pods/Target Support Files/Pods-Studio/Pods-Studio.release.xcconfig"; sourceTree = "<group>"; };
 		4C274277BF08453F5C02C229 /* Pods_StudioUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudioUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +134,10 @@
 			isa = PBXGroup;
 			children = (
 				1B2A879B1DFE313D00438821 /* Studio.entitlements */,
+				1BC4C1961E5C2A0D000AFF0D /* chat.png */,
+				1BC4C1901E5C2977000AFF0D /* menu.png */,
+				1BC4C1941E5C29DE000AFF0D /* menu-32.png */,
+				1BC4C1921E5C29D9000AFF0D /* menu-24.png */,
 				1B0DC6C71E581C230053B038 /* back.png */,
 				1B0DC6C91E58FD490053B038 /* UserStatusViewController.swift */,
 				1BC4C18E1E5C1F2F000AFF0D /* StudentSubjectsController.swift */,
@@ -307,8 +319,12 @@
 			files = (
 				1BABDD371DFCEF09000217F2 /* LaunchScreen.storyboard in Resources */,
 				1B0DC6C81E581C230053B038 /* back.png in Resources */,
+				1BC4C1971E5C2A0D000AFF0D /* chat.png in Resources */,
+				1BC4C1911E5C2977000AFF0D /* menu.png in Resources */,
 				1B7950411DFCFEC500F73658 /* GoogleService-Info.plist in Resources */,
 				1BABDD341DFCEF09000217F2 /* Assets.xcassets in Resources */,
+				1BC4C1951E5C29DE000AFF0D /* menu-32.png in Resources */,
+				1BC4C1931E5C29D9000AFF0D /* menu-24.png in Resources */,
 				1BABDD321DFCEF09000217F2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

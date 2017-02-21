@@ -214,7 +214,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.42644500732421875" green="0.0017486762953922153" blue="0.042338505387306213" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.42745098039215684" green="0.0" blue="0.043137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="KrP-n5-fyP" firstAttribute="centerX" secondItem="yMY-RN-kP5" secondAttribute="centerX" id="4SN-bV-dNN"/>
                             <constraint firstItem="1f9-Ay-nuo" firstAttribute="top" secondItem="KrP-n5-fyP" secondAttribute="bottom" constant="94.5" id="ADs-eT-kGn"/>
@@ -246,8 +246,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="YFW-EN-33L">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="O6c-uU-1oI"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="WF2-ya-XqQ"/>
+                        <barButtonItem key="leftBarButtonItem" image="menu-32.png" id="O6c-uU-1oI"/>
+                        <barButtonItem key="rightBarButtonItem" image="chat.png" id="WF2-ya-XqQ"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXw-iI-J5v" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -275,6 +275,8 @@
     </scenes>
     <resources>
         <image name="back.png" width="54" height="92"/>
+        <image name="chat.png" width="32" height="32"/>
+        <image name="menu-32.png" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="F7O-RC-lPW"/>

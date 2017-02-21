@@ -23,7 +23,7 @@ class StudentSubjectsController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationItem.title = "One"
+        navigationItem.title = "Subjects"
     }
     
     
