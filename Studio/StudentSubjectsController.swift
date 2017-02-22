@@ -16,8 +16,6 @@ import SCLAlertView
 
 class StudentSubjectsController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
-    
-    var counter = 0
     @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -37,16 +35,19 @@ class StudentSubjectsController: UIViewController, UITableViewDelegate, UITableV
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell = UITableViewCell(style: UITableViewCellStyle.default,reuseIdentifier: "SubjectCell")
+       // let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "SubjectCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SubjectCell", for: indexPath) as! SubjectCell
 
+       // let cell = SubjectCell(style: UITableViewCellStyle.default, reuseIdentifier: "SubjectCell")
+        
+        cell.cellUIImage.image = UIImage(named: "menu.png")
+        
+       // cell.cellUIImage = UIImageView(UIImage(named: "menu-32.png"))
        
-        if indexPath.row % 2 != 0{
+        if indexPath.row % 2 == 0{
             cell.backgroundColor = UIColor.cyan
 
         }
-
-    
-        //cell.textLabel?.text = String(timesTableValue * indexPath.row)
         
         return cell
     }
